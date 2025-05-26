@@ -1,0 +1,47 @@
+#######################################
+# Syntax Coloring Map For BarePoller
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+BarePoller	KEYWORD1
+ArduinoPlat	KEYWORD1
+Blinker		KEYWORD1
+PrecisionTimer	KEYWORD1
+Switch		KEYWORD1
+Platform	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+# ArduinoPlat methods (excluding those from Platform)
+# Blinker methods
+execute		KEYWORD2
+reset		KEYWORD2
+# PrecisionTimer methods
+start		KEYWORD2
+stop		KEYWORD2
+running		KEYWORD2
+stopped		KEYWORD2
+expired		KEYWORD2
+remaining	KEYWORD2
+# Switch methods
+isOn		KEYWORD2
+# Platform methods (these are virtual, but good to list)
+getSystemUpTimeMicros	KEYWORD2
+getSystemUpTimeMillis	KEYWORD2
+# getSystemUpTimeMinutes KEYWORD2 // Removed as it was removed from Platform
+setPinMode	KEYWORD2
+setPin		KEYWORD2
+getPin		KEYWORD2
+readAnalogPin	KEYWORD2
+map			KEYWORD2
+
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+# PinMode enum from Platform.h
+PIN_INPUT	LITERAL1
+PIN_OUTPUT	LITERAL1
