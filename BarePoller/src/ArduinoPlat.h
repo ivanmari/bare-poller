@@ -9,7 +9,7 @@ class ArduinoPlat : public Platform
 public:
     ArduinoPlat();
     virtual ~ArduinoPlat();
-    // virtual unsigned getSystemUpTimeMinutes(); // Removed as Arduino provides only millis/micros directly
+    virtual unsigned getSystemUpTimeMinutes(); // Removed as Arduino provides only millis/micros directly
     virtual unsigned long getSystemUpTimeMillis();
     virtual unsigned long getSystemUpTimeMicros();
     virtual void setPinMode(int pin, PinMode mode);

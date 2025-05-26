@@ -1,12 +1,16 @@
 #ifndef BAREPOLLER_H
 #define BAREPOLLER_H
 
-// Include all public headers of the library
+// Ensure Arduino specific types are available first
+#include <Arduino.h>
 
-// Platform specific implementation (Arduino)
-#include "ArduinoPlat.h" // Includes Platform.h and Arduino.h
+// Include the abstract Platform definition first
+#include "Platform.h"
 
-// Core library classes
+// Include the concrete Arduino platform implementation
+#include "ArduinoPlat.h"
+
+// Core library classes that depend on Platform
 #include "PrecisionTimer.h"
 #include "Switch.h"
 #include "Blinker.h"

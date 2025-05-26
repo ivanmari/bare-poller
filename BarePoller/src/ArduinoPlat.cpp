@@ -17,11 +17,11 @@ ArduinoPlat::map(long x, long in_min, long in_max, long out_min, long out_max)
     return ::map(x, in_min, in_max, out_min, out_max);
 }
 
-// unsigned // Removed getSystemUpTimeMinutes
-// ArduinoPlat::getSystemUpTimeMinutes()
-// {
-//     return millis()/60000;
-// }
+unsigned
+ArduinoPlat::getSystemUpTimeMinutes()
+{
+    return ::millis()/60000;
+}
 
 unsigned long
 ArduinoPlat::getSystemUpTimeMillis()
