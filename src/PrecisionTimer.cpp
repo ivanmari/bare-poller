@@ -1,3 +1,7 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2025 the BarePoller authors
+// This file is part of BarePoller, licensed under the MIT License. See LICENSE file for details.
+
 #include "PrecisionTimer.h"
 
 PrecisionTimer::PrecisionTimer(Platform* plat, unsigned long timeout):m_plat(plat), m_timeStart(0), m_timeElapsed(0), m_timeout(timeout), m_active(false)
