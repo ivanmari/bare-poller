@@ -3,16 +3,14 @@
 // This file is part of BarePoller, licensed under the MIT License. See LICENSE file for details.
 
 #include "Switch.h"
-// const int DEBOUNCE_PERIOD = 0; //us // Made this a constructor argument with default 0
 
-// Modified constructor
 Switch::Switch(Platform* platform, int pin, bool level, unsigned long debounce_period_us):
     m_pin(pin), 
     m_active_level(level),
-    m_debounceTimer(platform, debounce_period_us), // Use platform for timer
+    m_debounceTimer(platform, debounce_period_us),
     m_platform(platform) 
 {
-    m_platform->setPinMode(m_pin, PIN_INPUT); // Set pin mode in constructor
+    m_platform->setPinMode(m_pin, PIN_INPUT);
 }
 
 bool

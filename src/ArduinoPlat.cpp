@@ -3,17 +3,6 @@
 // This file is part of BarePoller, licensed under the MIT License. See LICENSE file for details.
 
 #include "ArduinoPlat.h"
-// Arduino.h is already included in ArduinoPlat.h
-
-ArduinoPlat::ArduinoPlat()
-{
-    //ctor
-}
-
-ArduinoPlat::~ArduinoPlat()
-{
-    //dtor
-}
 
 long
 ArduinoPlat::map(long x, long in_min, long in_max, long out_min, long out_max)
@@ -45,10 +34,10 @@ ArduinoPlat::setPinMode(int pin, PinMode mode)
     switch(mode)
     {
     case PIN_INPUT:
-        ::pinMode(pin, INPUT); // Added :: scope specifier
+        ::pinMode(pin, INPUT);
         break;
     case PIN_OUTPUT:
-        ::pinMode(pin, OUTPUT); // Added :: scope specifier
+        ::pinMode(pin, OUTPUT);
         break;
     }
 }
@@ -56,18 +45,17 @@ ArduinoPlat::setPinMode(int pin, PinMode mode)
 void
 ArduinoPlat::setPin(int pin, bool level)
 {
-    // Removed if (level) and else block for direct mapping
-    ::digitalWrite (pin, level ? HIGH : LOW); // Added :: scope specifier
+    ::digitalWrite (pin, level ? HIGH : LOW);
 }
 
 bool
 ArduinoPlat::getPin(int pin)
 {
-    return ::digitalRead (pin); // Added :: scope specifier
+    return ::digitalRead (pin);
 }
 
 int
 ArduinoPlat::readAnalogPin(int pin)
 {
-    return ::analogRead(pin); // Added :: scope specifier
+    return ::analogRead(pin);
 }

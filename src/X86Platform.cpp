@@ -20,16 +20,6 @@ using std::chrono::steady_clock;
 extern unsigned char GpioSnapshot[20];
 extern std::mutex g_i_mutex;
 
-X86Platform::X86Platform()
-{
-
-}
-
-X86Platform::~X86Platform()
-{
-    //dtor
-}
-
 long
 X86Platform::map(long x, long in_min, long in_max, long out_min, long out_max)
 {

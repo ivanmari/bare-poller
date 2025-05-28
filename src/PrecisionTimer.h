@@ -11,7 +11,6 @@ class PrecisionTimer
 {
 public:
     PrecisionTimer(Platform* plat, unsigned long timeout);
-    virtual ~PrecisionTimer();
 
     virtual void stop();
     virtual void start();

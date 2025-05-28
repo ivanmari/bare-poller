@@ -6,9 +6,7 @@
 #define BLINKER_H
 
 #include "PrecisionTimer.h"
-// Switch.h will be included by BarePoller.h or directly by user sketch if needed
-// #include "Switch.h" 
-#include "Platform.h" // Added Platform.h include
+#include "Platform.h"
 
 class Blinker
 {

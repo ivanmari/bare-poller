@@ -6,12 +6,6 @@
 
 PrecisionTimer::PrecisionTimer(Platform* plat, unsigned long timeout):m_plat(plat), m_timeStart(0), m_timeElapsed(0), m_timeout(timeout), m_active(false)
 {
-    //ctor
-}
-
-PrecisionTimer::~PrecisionTimer()
-{
-    //dtor
 }
 
 void
