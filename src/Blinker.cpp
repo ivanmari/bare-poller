@@ -1,3 +1,7 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2025 the BarePoller authors
+// This file is part of BarePoller, licensed under the MIT License. See LICENSE file for details.
+
 #include "Blinker.h"
 // #include "Armed.h" // Removed missing include
 // #include "io_defs.h" // Removed project-specific include
