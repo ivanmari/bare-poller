@@ -1,3 +1,7 @@
+// SPDX-License-Identifier: MIT
+// Copyright (c) 2025 the BarePoller authors
+// This file is part of BarePoller, licensed under the MIT License. See LICENSE file for details.
+
 #include "Switch.h"
 // const int DEBOUNCE_PERIOD = 0; //us // Made this a constructor argument with default 0
 
