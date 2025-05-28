@@ -16,7 +16,7 @@ class Platform
 public:
     virtual unsigned long getSystemUpTimeMicros() = 0;
     virtual unsigned long getSystemUpTimeMillis() = 0;
-    virtual unsigned getSystemUpTimeMinutes() = 0; // Consider removing if not used by ArduinoPlat
+    virtual unsigned getSystemUpTimeMinutes() = 0;
     virtual void setPinMode(int pin, PinMode mode) = 0;
     virtual void setPin(int pin, bool level) = 0;
     virtual bool getPin(int pin) = 0;

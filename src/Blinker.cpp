@@ -3,8 +3,6 @@
 // This file is part of BarePoller, licensed under the MIT License. See LICENSE file for details.
 
 #include "Blinker.h"
-// #include "Armed.h" // Removed missing include
-// #include "io_defs.h" // Removed project-specific include
 
 Blinker::Blinker(Platform* plat, int output_pin, long int time_on, long int time_off, bool active_level):
 m_plat(plat),

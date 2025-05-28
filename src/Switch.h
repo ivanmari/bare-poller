@@ -6,12 +6,11 @@
 #define SWITCH_H
 
 #include "PrecisionTimer.h"
-#include "Platform.h" // Added Platform.h include
+#include "Platform.h"
 
 class Switch
 {
 public:
-    // Modified constructor to take Platform* instead of ASi*
     Switch(Platform* platform, int pin, bool level, unsigned long debounce_period_us = 0); 
 
     bool isOn();
