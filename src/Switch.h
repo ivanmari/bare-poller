@@ -8,10 +8,14 @@
 #include "PrecisionTimer.h"
 #include "Platform.h"
 
+const unsigned long DEBOUNCE_PERIOD = 20000; //microseconds
+
+
 class Switch
 {
 public:
-    Switch(Platform* platform, int pin, bool level, unsigned long debounce_period_us = 0); 
+    // Modified constructor to take Platform* instead of ASi*
+    Switch(Platform* platform, int pin, bool level, unsigned long debounce_period_us = DEBOUNCE_PERIOD);
 
     bool isOn();
 
