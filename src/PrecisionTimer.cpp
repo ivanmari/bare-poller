@@ -3,6 +3,7 @@
 // This file is part of BarePoller, licensed under the MIT License. See LICENSE file for details.
 
 #include "PrecisionTimer.h"
+#include <limits> // Required for std::numeric_limits
 
 PrecisionTimer::PrecisionTimer(Platform* plat, unsigned long timeout):m_plat(plat), m_timeStart(0), m_timeElapsed(0), m_timeout(timeout), m_active(false)
 {
@@ -48,28 +49,46 @@ PrecisionTimer::reset()
 bool
 PrecisionTimer::expired() const
 {
-    bool ret = false;
-    unsigned long currently_elapsed = 0;
-
-    if(m_active)
-    {
-        currently_elapsed = m_plat->getSystemUpTimeMicros() - m_timeStart;
+    unsigned long current_active_elapsed = 0;
+    if (m_active) {
+        current_active_elapsed = m_plat->getSystemUpTimeMicros() - m_timeStart; // Relies on unsigned arithmetic for wrap safety
     }
 
-    if (m_timeElapsed + currently_elapsed >= m_timeout)
-    {
-        ret = true;
+    unsigned long total_effective_elapsed;
+    // Check for overflow before adding m_timeElapsed and current_active_elapsed
+    // Note: (std::numeric_limits<unsigned long>::max)() is ULONG_MAX
+    if (m_timeElapsed > 0 && current_active_elapsed > (std::numeric_limits<unsigned long>::max)() - m_timeElapsed) {
+        total_effective_elapsed = (std::numeric_limits<unsigned long>::max)(); // Saturate at max
+    } else {
+        total_effective_elapsed = m_timeElapsed + current_active_elapsed;
     }
-    return ret;
+
+    return total_effective_elapsed >= m_timeout;
 }
 
 long
 PrecisionTimer::remaining() const
 {
-    long remaining_time = 0;
-    if(m_active)
-    {
-        remaining_time = m_timeStart + m_timeout - m_plat->getSystemUpTimeMicros();
+    unsigned long current_total_elapsed;
+
+    if (m_active) {
+        unsigned long current_micros = m_plat->getSystemUpTimeMicros();
+        unsigned long elapsed_in_current_run = current_micros - m_timeStart; // Relies on unsigned arithmetic for wrap safety
+
+        // Check for overflow before adding m_timeElapsed and elapsed_in_current_run
+        // Note: (std::numeric_limits<unsigned long>::max)() is ULONG_MAX
+        if (m_timeElapsed > 0 && elapsed_in_current_run > (std::numeric_limits<unsigned long>::max)() - m_timeElapsed) {
+            current_total_elapsed = (std::numeric_limits<unsigned long>::max)(); // Saturate at max
+        } else {
+            current_total_elapsed = m_timeElapsed + elapsed_in_current_run;
+        }
+    } else {
+        current_total_elapsed = m_timeElapsed;
     }
-    return remaining_time;
+
+    if (current_total_elapsed >= m_timeout) {
+        return 0; // Timer has expired or exactly met timeout
+    }
+
+    return (long)(m_timeout - current_total_elapsed);
 }
