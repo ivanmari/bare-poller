@@ -71,5 +71,10 @@ PrecisionTimer::remaining() const
     {
         remaining_time = m_timeStart + m_timeout - m_plat->getSystemUpTimeMicros();
     }
+
+    if (remaining_time < 0)
+    {
+        remaining_time = 0;
+    }
     return remaining_time;
 }
