@@ -118,3 +118,32 @@ TEST(PrecisionTimerTest, RemainingTimeAfterExpiry) {
     EXPECT_CALL(platform, getSystemUpTimeMicros()).WillOnce(Return(5000 + timeout + 2000));
     ASSERT_EQ(timer.remaining(), 0);
 }
+
+#include <limits>
+
+TEST(PrecisionTimerTest, HandlesOverflow) {
+    MockPlatformForTimer platform;
+    unsigned long timeout = 200000;
+    PrecisionTimer timer(&platform, timeout);
+
+    // Simulate starting the timer near the overflow point
+    unsigned long startTime = std::numeric_limits<unsigned long>::max() - 100000;
+    EXPECT_CALL(platform, getSystemUpTimeMicros()).WillOnce(Return(startTime));
+    timer.start();
+
+    // Simulate time advancing past the overflow point, but not expiring
+    unsigned long halfwayTime = startTime + timeout / 2;
+    EXPECT_CALL(platform, getSystemUpTimeMicros())
+        .WillOnce(Return(halfwayTime))  // For expired()
+        .WillOnce(Return(halfwayTime)); // For remaining()
+    ASSERT_FALSE(timer.expired());
+    EXPECT_EQ(timer.remaining(), timeout / 2);
+
+    // Simulate time advancing past the expiration point
+    unsigned long expiredTime = startTime + timeout;
+    EXPECT_CALL(platform, getSystemUpTimeMicros())
+        .WillOnce(Return(expiredTime))  // For expired()
+        .WillOnce(Return(expiredTime)); // For remaining()
+    ASSERT_TRUE(timer.expired());
+    EXPECT_EQ(timer.remaining(), 0);
+}
