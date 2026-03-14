@@ -17,35 +17,30 @@ m_blinkOffTimer(plat, time_off)
 void
 Blinker::execute()
 {
-    if(m_blinkOffTimer.stopped() && m_blinkOnTimer.stopped())
-    {
-        m_blinkOnTimer.start();
-    }
-
-    if(m_blinkOnTimer.running())
-    {
-        if(m_blinkOnTimer.expired())
-        {
-            m_blinkOffTimer.start();
-            m_blinkOnTimer.reset();
+    // State 1: OFF, waiting to turn ON.
+    if (m_blinkOffTimer.running()) {
+        if (m_blinkOffTimer.expired()) {
+            m_blinkOffTimer.reset();
+            m_blinkOnTimer.start();
+            m_plat->setPin(m_output_pin, m_active_level);
+        } else {
+            m_plat->setPin(m_output_pin, !m_active_level);
         }
-        else
-        {
+    }
+    // State 2: ON, waiting to turn OFF.
+    else if (m_blinkOnTimer.running()) {
+        if (m_blinkOnTimer.expired()) {
+            m_blinkOnTimer.reset();
+            m_blinkOffTimer.start();
+            m_plat->setPin(m_output_pin, !m_active_level);
+        } else {
             m_plat->setPin(m_output_pin, m_active_level);
         }
     }
-
-    if(m_blinkOffTimer.running())
-    {
-        if(m_blinkOffTimer.expired())
-        {
-            m_blinkOnTimer.start();
-            m_blinkOffTimer.reset();
-        }
-        else
-        {
-            m_plat->setPin(m_output_pin, !m_active_level);
-        }
+    // State 0: Initial state, start blinking.
+    else {
+        m_blinkOnTimer.start();
+        m_plat->setPin(m_output_pin, m_active_level);
     }
 }
 

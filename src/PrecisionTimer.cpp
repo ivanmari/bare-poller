@@ -66,10 +66,16 @@ PrecisionTimer::expired() const
 long
 PrecisionTimer::remaining() const
 {
-    long remaining_time = 0;
-    if(m_active)
-    {
-        remaining_time = m_timeStart + m_timeout - m_plat->getSystemUpTimeMicros();
+    unsigned long currently_elapsed = 0;
+    if (m_active) {
+        currently_elapsed = m_plat->getSystemUpTimeMicros() - m_timeStart;
     }
-    return remaining_time;
+
+    unsigned long total_elapsed = m_timeElapsed + currently_elapsed;
+
+    if (total_elapsed >= m_timeout) {
+        return 0;
+    }
+
+    return m_timeout - total_elapsed;
 }
