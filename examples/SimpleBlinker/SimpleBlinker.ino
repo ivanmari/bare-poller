@@ -1,13 +1,13 @@
 // SPDX-License-Identifier: MIT
-// Copyright (c) 2025 the BarePoller authors
-// This file is part of BarePoller, licensed under the MIT License. See LICENSE file for details.
+// Copyright (c) 2025 the BareMetalPoller authors
+// This file is part of BareMetalPoller, licensed under the MIT License. See LICENSE file for details.
 
-// This is an example of a non-blocking code using BarePoller library.
+// This is an example of a non-blocking code using BareMetalPoller library.
 // It blinks an LED at different freq using a debounced push button
 
 
 
-#include <BarePoller.h>
+#include <BareMetalPoller.h>
 
 // Define the LED pin
 const int LED_PIN = LED_BUILTIN; // Or any other digital pin

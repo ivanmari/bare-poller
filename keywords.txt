@@ -1,11 +1,11 @@
 #######################################
-# Syntax Coloring Map For BarePoller
+# Syntax Coloring Map For BareMetalPoller
 #######################################
 
 #######################################
 # Datatypes (KEYWORD1)
 #######################################
-BarePoller	KEYWORD1
+BareMetalPoller	KEYWORD1
 ArduinoPlat	KEYWORD1
 Blinker		KEYWORD1
 PrecisionTimer	KEYWORD1
