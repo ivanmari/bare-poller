@@ -1,4 +1,4 @@
-# bare-poller
+# BareMetalPoller
 Polling library for bare metal systems
 
 This library implements switches and timers for a loop based programming model.

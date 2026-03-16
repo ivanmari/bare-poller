@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(BarePollerTests)
+project(BareMetalPollerTests)
 
 # Include the Google Test framework
 include(FetchContent)
@@ -38,6 +38,6 @@ enable_testing()
 
 # Add the test to CTest
 add_test(
-  NAME BarePollerTests
+  NAME BareMetalPollerTests
   COMMAND run_tests
 )
